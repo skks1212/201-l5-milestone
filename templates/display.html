@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="http://haazir.co.in:8080/inc/lib/fawesome.js"></script>
+        <title>
+            Tasks List
+        </title>
+    </head>
+    <body>
+        <div class="flex items-center justify-center h-screen">
+            <div class="m-8">
+                <div class="font-black text-3xl">
+                    <i class="fa-solid fa-list-check"></i> Task Manager vX
+                </div>
+                <span class="text-sm">
+                    We really lost count
+                </span>
+                <br>
+                <br>
+                {% if tasks|length > 0 %}
+                <h2 class="text-xl font-bold">
+                    Pending Tasks
+                </h2>
+                <br>
+                {% for task in tasks %}
+                    <div class="border-slate-400 rounded border border-dashed p-3 flex justify-between items-center mb-1">
+                        <div class="flex">
+                            {{forloop.counter}}. 
+                            <div class="ml-2">
+                                {{task.title}}
+                                <br>
+                                <span class="text-gray-400 text-sm">
+                                    {{task.created_date}}
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="../complete_task/{{task.id}}" class="text-blue-400 ml-3" title="Mark as Done">
+                                <i class="fal fa-check"></i>
+                            </a>
+                            <a href="../delete-task/{{task.id}}" class="text-red-400 ml-3" title="Delete">
+                                <i class="fal fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <br>
+                {% endfor %}
+                {% endif %}
+
+                {% if completed|length > 0 %}
+                <h2 class="text-xl font-bold">
+                    Completed Tasks
+                </h2>
+                <br>
+                {% for task in completed %}
+                    <div class="border-slate-400 rounded border border-dashed p-3 flex justify-between items-center mb-1">
+                        <div class="flex">
+                            {{forloop.counter}}. 
+                            <div class="ml-2">
+                                {{task.title}}
+                                <br>
+                                <span class="text-gray-400 text-sm">
+                                    {{task.created_date}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <br>
+                {% endfor %}
+                {% endif %}
+                <br>
+                <a href="../tasks" class="bg-blue-500 hover:bg-blue-600 text-white rounded px-3 py-2 cursor-pointer transition">
+                    Add Tasks
+                </a>
+                &nbsp;
+                <a href="../completed_tasks" class="bg-blue-500 hover:bg-blue-600 text-white rounded px-3 py-2 cursor-pointer transition">
+                    Completed Tasks
+                </a>
+                &nbsp;
+                <a href="../all_tasks" class="bg-blue-500 hover:bg-blue-600 text-white rounded px-3 py-2 cursor-pointer transition">
+                    All Tasks
+                </a>
+            </div>
+        </div>
+        
+        
+    </body>
+</html>
